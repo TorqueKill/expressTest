@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.io Example</title>
+  </head>
+  <body>
+    <h1>Hello, Client!</h1>
+    <div id="yourAddress"></div>
+    <div id="otherAddresses"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      socket.on("yourAddress", (address) => {
+        const yourAddressDiv = document.getElementById("yourAddress");
+        yourAddressDiv.textContent = `Your address: ${address}`;
+      });
+
+      socket.on("otherAddresses", (addresses) => {
+        const otherAddressesDiv = document.getElementById("otherAddresses");
+        const addressesList = addresses
+          .map((address) => `<li>${address}</li>`)
+          .join("");
+        otherAddressesDiv.innerHTML = `<p>Other addresses:</p><ul>${addressesList}</ul>`;
+      });
+    </script>
+  </body>
+</html>
